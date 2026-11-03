@@ -1,0 +1,152 @@
+# Benchmark discovery config for evaluating discovery agents with synthetic ecology data
+# Use with: python launch_discovery.py --config-name benchmark_discovery.yaml
+# For Claude Code agents: python launch_cc_discovery.py --config-name cc_benchmark_discovery.yaml
+
+# Set to true to use Claude Code agents instead of LiteLLM agents
+# (requires cc_benchmark_discovery.yaml or launch_cc_discovery.py)
+use_claude_code: false
+
+# Model configuration
+model_name: claude-sonnet-4-5
+model_url: "https://YOUR_API_ENDPOINT/"
+
+# Secrets (set via environment variable LITELLM_API_KEY)
+secrets: {}
+
+# Logging
+log_llm_metrics: true
+
+# Workspace for discovery outputs
+workspace_root: ${oc.env:PWD}/results/benchmark_discovery_${now:%Y%m%d_%H%M%S}
+
+# Number of iterations (more iterations = more hypotheses tested)
+n_iterations: 10
+
+# =========================================================================
+# BENCHMARK DATASET CONFIGURATION
+# =========================================================================
+# Use the benchmark dataset adapter with pre-generated synthetic data
+# Generate data first with: python scripts/generate_ecology_benchmark.py --preset easy --output data/synthetic_benchmarks/ecology_easy
+
+benchmark_dir: ${oc.env:PWD}/data/synthetic_benchmarks/ecology_easy
+
+dataset_args:
+  _target_: core.discovery.benchmark_dataset.BenchmarkDatasetAdapter
+  data_path: ${benchmark_dir}/data.parquet
+  ground_truth_path: ${benchmark_dir}/ground_truth.json
+  prior_insights_path: ${benchmark_dir}/prior_insights.parquet
+  include_prior_in_prompt: true  # Include prior knowledge in hypothesis generator prompt
+  prior_prompt_detail: "full"     # Options: "full", "summary", "none"
+  random_seed: 42
+
+# =========================================================================
+# LLM AGENTS
+# =========================================================================
+
+# Hypothesis generator - proposes new scientific hypotheses
+hypothesis_generator_args:
+  _target_: core.discovery.hypothesis_generator.HypothesisGeneratorAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a scientific hypothesis generation expert studying ecological data.
+    Generate testable, specific hypotheses based on dataset characteristics.
+    
+    IMPORTANT: Look for NOVEL patterns. Avoid re-testing known relationships.
+    Focus on interactions, conditional effects, and non-obvious correlations.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+# Experiment planner - designs statistical tests
+experiment_planner_args:
+  _target_: core.discovery.experiment_planner.ExperimentPlannerAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: "You are an experimental design expert. Plan rigorous experiments to test scientific hypotheses using appropriate statistical methods."
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+# Experiment runner (deterministic - no LLM)
+experiment_runner_args:
+  _target_: core.discovery.experiment_runner.ExperimentRunner
+
+# =========================================================================
+# INSIGHT STORAGE AND EVALUATION
+# =========================================================================
+
+insight_store_args:
+  _target_: core.discovery.insight_store.InsightStore
+  store_path: ${workspace_root}/insights.parquet
+
+# Tool router - executes statistical tests safely
+tool_router_args:
+  _target_: core.discovery.tool_router.ToolRouter
+  dataset: ${dataset_args}
+  allowed_tools:
+    - corr_test
+    - group_diff_test
+    - predictive_test
+    - cluster_and_enrich
+    - stratified_retest
+  max_samples: 5000
+  timeout: 120
+  use_local_execution: true
+
+# Insight evaluator - determines if hypothesis is supported/rejected
+insight_eval_args:
+  _target_: core.discovery.insight_evaluator.InsightEvaluator
+  llm_client: ${hypothesis_generator_args}
+  insight_store: ${insight_store_args}
+  thresholds:
+    min_effect_size: 0.2
+    max_p_value: 0.05
+    min_predictive_gain: 0.05
+    min_stability: 0.7
+  reward_weights:
+    strength: 1.0
+    novelty: 2.0
+    generalization: 1.5
+    redundancy: -0.5
+    confound: -1.0
+
+# =========================================================================
+# META-DISCOVERY (Optional - finds patterns across insights)
+# =========================================================================
+
+meta_discovery_args:
+  _target_: core.discovery.meta_discovery.MetaDiscoveryAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a meta-science analyst. Analyze patterns across scientific insights 
+    to discover higher-level relationships, confounds, and generalizations.
+    Help guide future hypothesis generation based on what has been learned.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+meta_step_frequency: 5    # Run meta-discovery every N iterations
+meta_hypotheses_per_step: 2  # Number of meta-hypotheses per step
+
+# =========================================================================
+# DISCOVERY RUNNER
+# =========================================================================
+
+# Enable context passing (insights + previous hypotheses to generator)
+# Set to true for fairer comparison with tree search
+enable_context_passing: false
+
+science_runner_args:
+  _target_: core.runners.discovery_mvp_runner.DiscoveryMVPRunner
+  workspace_root: ${workspace_root}
+  hypothesis_generator: ${hypothesis_generator_args}
+  experiment_planner: ${experiment_planner_args}
+  experiment_runner: ${experiment_runner_args}
+  insight_evaluator: ${insight_eval_args}
+  insight_store: ${insight_store_args}
+  dataset: ${dataset_args}
+  tool_router: ${tool_router_args}
+  max_retries: 3
+  meta_discovery_agent: ${meta_discovery_args}
+  meta_step_frequency: ${meta_step_frequency}
+  meta_hypotheses_per_step: ${meta_hypotheses_per_step}
+  enable_context_passing: ${enable_context_passing}

@@ -1,0 +1,344 @@
+{
+  "dataset_id": "asia",
+  "seed": 42,
+  "n_samples": 5000,
+  "generation_method": "realworld_causal_dag",
+  "feature_schema": {
+    "variables": [
+      "asia",
+      "tub",
+      "smoke",
+      "lung",
+      "bronc",
+      "either",
+      "xray",
+      "dysp"
+    ],
+    "n_nodes": 8,
+    "n_edges": 8
+  },
+  "patterns": [
+    {
+      "id": "surface_tub_xray",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between tub and xray (r=0.29)",
+      "variables": [
+        "tub",
+        "xray"
+      ],
+      "effect": 0.28562563067371644,
+      "effect_size": 0.28562563067371644
+    },
+    {
+      "id": "surface_smoke_either",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between smoke and either (r=0.17)",
+      "variables": [
+        "smoke",
+        "either"
+      ],
+      "effect": 0.1680950700655024,
+      "effect_size": 0.1680950700655024
+    },
+    {
+      "id": "surface_smoke_xray",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between smoke and xray (r=0.10)",
+      "variables": [
+        "smoke",
+        "xray"
+      ],
+      "effect": 0.1036274370204345,
+      "effect_size": 0.1036274370204345
+    },
+    {
+      "id": "surface_smoke_dysp",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between smoke and dysp (r=0.24)",
+      "variables": [
+        "smoke",
+        "dysp"
+      ],
+      "effect": 0.2364648668629268,
+      "effect_size": 0.2364648668629268
+    },
+    {
+      "id": "surface_lung_xray",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between lung and xray (r=0.67)",
+      "variables": [
+        "lung",
+        "xray"
+      ],
+      "effect": 0.6672055867982369,
+      "effect_size": 0.6672055867982369
+    },
+    {
+      "id": "surface_lung_dysp",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between lung and dysp (r=0.18)",
+      "variables": [
+        "lung",
+        "dysp"
+      ],
+      "effect": 0.18040580457851035,
+      "effect_size": 0.18040580457851035
+    },
+    {
+      "id": "surface_xray_dysp",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between xray and dysp (r=0.14)",
+      "variables": [
+        "xray",
+        "dysp"
+      ],
+      "effect": 0.13834598705147416,
+      "effect_size": 0.13834598705147416
+    },
+    {
+      "id": "direct_asia_tub",
+      "type": "correlation",
+      "tier": "novel",
+      "variables": [
+        "asia",
+        "tub"
+      ],
+      "effect": 0.0114023762670547,
+      "effect_size": 0.0114023762670547,
+      "description": "Direct causal edge: asia -> tub (r=0.011, type=correlation)",
+      "difficulty": "complex"
+    },
+    {
+      "id": "direct_tub_either",
+      "type": "correlation",
+      "tier": "novel",
+      "variables": [
+        "tub",
+        "either"
+      ],
+      "effect": 0.3869265526826057,
+      "effect_size": 0.3869265526826057,
+      "description": "Direct causal edge: tub -> either (r=0.387, type=correlation)",
+      "difficulty": "moderate"
+    },
+    {
+      "id": "direct_either_xray",
+      "type": "correlation",
+      "tier": "novel",
+      "variables": [
+        "either",
+        "xray"
+      ],
+      "effect": 0.7285060576454847,
+      "effect_size": 0.7285060576454847,
+      "description": "Direct causal edge: either -> xray (r=0.729, type=correlation)",
+      "difficulty": "complex"
+    },
+    {
+      "id": "direct_either_dysp",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "either",
+        "dysp"
+      ],
+      "effect": 0.19897258216634892,
+      "effect_size": 0.19897258216634892,
+      "description": "Direct causal edge: either -> dysp (r=0.199, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "either",
+        "bronc"
+      ],
+      "outcome": "dysp",
+      "interaction_effect": 0.19897258216634892
+    },
+    {
+      "id": "direct_smoke_lung",
+      "type": "correlation",
+      "tier": "prior_knowledge",
+      "variables": [
+        "smoke",
+        "lung"
+      ],
+      "effect": 0.18258001185184317,
+      "effect_size": 0.18258001185184317,
+      "description": "Direct causal edge: smoke -> lung (r=0.183, type=correlation)"
+    },
+    {
+      "id": "direct_smoke_bronc",
+      "type": "correlation",
+      "tier": "prior_knowledge",
+      "variables": [
+        "smoke",
+        "bronc"
+      ],
+      "effect": 0.30466159239344215,
+      "effect_size": 0.30466159239344215,
+      "description": "Direct causal edge: smoke -> bronc (r=0.305, type=correlation)"
+    },
+    {
+      "id": "direct_lung_either",
+      "type": "correlation",
+      "tier": "novel",
+      "variables": [
+        "lung",
+        "either"
+      ],
+      "effect": 0.91776310714732,
+      "effect_size": 0.91776310714732,
+      "description": "Direct causal edge: lung -> either (r=0.918, type=correlation)",
+      "difficulty": "moderate"
+    },
+    {
+      "id": "direct_bronc_dysp",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "bronc",
+        "dysp"
+      ],
+      "effect": 0.6854011638151011,
+      "effect_size": 0.6854011638151011,
+      "description": "Direct causal edge: bronc -> dysp (r=0.685, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "bronc",
+        "either"
+      ],
+      "outcome": "dysp",
+      "interaction_effect": 0.6854011638151011
+    },
+    {
+      "id": "chain_smoke_lung_either_dysp",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: smoke -> lung -> either -> dysp (indirect effect = 0.033)",
+      "chain": [
+        "smoke",
+        "lung",
+        "either",
+        "dysp"
+      ],
+      "direct_effects": [
+        0.18258001185184317,
+        0.91776310714732,
+        0.19897258216634892
+      ],
+      "indirect_effect": 0.03334088032229693
+    },
+    {
+      "id": "chain_smoke_bronc_dysp",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: smoke -> bronc -> dysp (indirect effect = 0.209)",
+      "chain": [
+        "smoke",
+        "bronc",
+        "dysp"
+      ],
+      "direct_effects": [
+        0.30466159239344215,
+        0.6854011638151011
+      ],
+      "indirect_effect": 0.2088154099962272
+    },
+    {
+      "id": "chain_smoke_lung_either",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: smoke -> lung -> either (indirect effect = 0.168)",
+      "chain": [
+        "smoke",
+        "lung",
+        "either"
+      ],
+      "direct_effects": [
+        0.18258001185184317,
+        0.91776310714732
+      ],
+      "indirect_effect": 0.1675651989801421
+    },
+    {
+      "id": "chain_smoke_lung_either_xray",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: smoke -> lung -> either -> xray (indirect effect = 0.122)",
+      "chain": [
+        "smoke",
+        "lung",
+        "either",
+        "xray"
+      ],
+      "direct_effects": [
+        0.18258001185184317,
+        0.91776310714732,
+        0.7285060576454847
+      ],
+      "indirect_effect": 0.12207226250760451
+    },
+    {
+      "id": "confound_either_xray_dysp",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: xray and dysp appear correlated (r=0.14) due to common cause either (partial r=-0.01)",
+      "apparent_vars": [
+        "xray",
+        "dysp"
+      ],
+      "apparent_correlation": [
+        "xray",
+        "dysp"
+      ],
+      "confound": "either",
+      "apparent_effect": 0.13834598705147416,
+      "true_effect": -0.009841100368611485
+    },
+    {
+      "id": "interaction_bronc_either_dysp",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: bronc x either -> dysp (significant interaction term)",
+      "predictors": [
+        "bronc",
+        "either"
+      ],
+      "outcome": "dysp"
+    }
+  ],
+  "evaluation_criteria": {
+    "scoring": {
+      "prior_rediscovery": -1.0,
+      "obvious_rediscovery": -0.5,
+      "novel_simple_found": 0.5,
+      "novel_moderate_found": 1.0,
+      "novel_complex_found": 2.0
+    },
+    "matching": {
+      "variable_overlap_threshold": 0.5,
+      "effect_direction_must_match": true,
+      "llm_semantic_matching": true
+    }
+  },
+  "include_prior_in_prompt": true,
+  "prior_prompt_detail": "full",
+  "metadata": {
+    "domain": "medical_diagnosis",
+    "reference_paper": "Lauritzen & Spiegelhalter (1988)",
+    "data_source": "pgmpy_sample",
+    "variable_descriptions": {}
+  }
+}

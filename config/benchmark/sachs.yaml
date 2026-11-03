@@ -1,0 +1,11 @@
+# Real-World Benchmark - SACHS
+# Protein signaling network: 11 nodes, 17 edges, 7466 real data samples
+benchmark:
+  generation_method: realworld_causal_dag
+  preset: sachs
+  name: sachs
+  seed: 42
+  n_samples: 7466
+  correlation_threshold: 0.15
+  data_source: cdt_sachs
+  domain: molecular_biology

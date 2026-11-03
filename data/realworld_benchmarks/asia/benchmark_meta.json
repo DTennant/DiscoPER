@@ -1,0 +1,16 @@
+{
+  "name": "asia",
+  "generation_method": "realworld_causal_dag",
+  "preset": "asia",
+  "seed": 42,
+  "n_samples": 5000,
+  "data_source": "pgmpy_sample",
+  "domain": "medical_diagnosis",
+  "n_nodes": 8,
+  "n_edges": 8,
+  "n_prior_patterns": 2,
+  "n_obvious_patterns": 7,
+  "n_novel_patterns": 12,
+  "correlation_threshold": 0.1,
+  "reference_paper": "Lauritzen & Spiegelhalter (1988)"
+}

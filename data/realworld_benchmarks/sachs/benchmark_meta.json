@@ -1,0 +1,16 @@
+{
+  "name": "sachs",
+  "generation_method": "realworld_causal_dag",
+  "preset": "sachs",
+  "seed": 42,
+  "n_samples": 7466,
+  "data_source": "cdt_sachs",
+  "domain": "molecular_biology",
+  "n_nodes": 11,
+  "n_edges": 17,
+  "n_prior_patterns": 4,
+  "n_obvious_patterns": 26,
+  "n_novel_patterns": 57,
+  "correlation_threshold": 0.15,
+  "reference_paper": "Sachs et al. (2005) Science 308:523-529"
+}

@@ -1,0 +1,32 @@
+# ExperiGen-like ablation: P=Partial (task description given), no Reflect
+# Simulates ExperiGen's setting: system is told what kind of patterns to look for
+defaults:
+  - inat_discovery
+  - _self_
+
+hypothesis_generator_args:
+  _target_: core.discovery.hypothesis_generator.HypothesisGeneratorAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are analyzing an iNaturalist biodiversity dataset.
+    
+    TASK DESCRIPTION: This dataset contains 800 research-grade wildlife observations 
+    across 8 species (3 kingdoms: Animalia, Plantae, Fungi) with GPS coordinates, 
+    dates, and taxonomic classification. The goal is to find statistically significant 
+    relationships between species traits, geographic distribution, and temporal patterns.
+    
+    DATASET SUMMARY:
+    - 800 observations across 8 species
+    - Variables: latitude, longitude, month, season, kingdom, class_name, species_name, positional_accuracy
+    - Species include: Vulpes vulpes, Cervus elaphus (mammals), Hirundo rustica, Turdus migratorius (birds), 
+      Danaus plexippus (insect), Amanita muscaria (fungi), Helianthus annuus, Taraxacum officinale (plants)
+    - Geographic range: global, with concentration in Northern Hemisphere
+    
+    Generate hypotheses about ecological patterns in this data. Test each with appropriate 
+    statistical methods.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+# No Reflect (ExperiGen uses implicit conditioning, not explicit reflection)
+meta_discovery_args: null

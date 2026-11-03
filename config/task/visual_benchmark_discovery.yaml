@@ -1,0 +1,172 @@
+# Visual benchmark discovery config for evaluating discovery agents with visual ecology data
+# Use with: python launch_discovery.py --config-path=config/task --config-name=visual_benchmark_discovery
+
+# Model configuration
+model_name: claude-sonnet-4-5
+model_url: "https://YOUR_API_ENDPOINT/"
+
+# Secrets (set via environment variable LITELLM_API_KEY)
+secrets: {}
+
+# Logging
+log_llm_metrics: true
+
+# Workspace for discovery outputs
+workspace_root: ${oc.env:PWD}/results/visual_benchmark_discovery_${now:%Y%m%d_%H%M%S}
+
+# Number of iterations
+n_iterations: 10
+
+# =========================================================================
+# VISUAL BENCHMARK DATASET CONFIGURATION
+# =========================================================================
+# Generate data first with:
+#   python scripts/generate_visual_benchmark.py --preset easy --output data/visual_benchmarks/easy
+
+visual_benchmark_dir: ${oc.env:PWD}/data/visual_benchmarks/easy_programmatic
+
+dataset_args:
+  _target_: core.benchmark.visual.visual_dataset_adapter.VisualBenchmarkDatasetAdapter
+  features_path: ${visual_benchmark_dir}/extracted_features.parquet
+  ground_truth_path: ${visual_benchmark_dir}/ground_truth.json
+  tabular_data_path: ${visual_benchmark_dir}/tabular_data.parquet
+  images_dir: ${visual_benchmark_dir}/images
+  prior_insights_path: ${visual_benchmark_dir}/prior_insights.parquet
+  include_prior_in_prompt: true
+  prior_prompt_detail: "full"
+  random_seed: 42
+  feature_variable_mapping_path: ${visual_benchmark_dir}/feature_variable_mapping.json
+
+# =========================================================================
+# LLM AGENTS
+# =========================================================================
+
+# Hypothesis generator - proposes new scientific hypotheses about visual features
+hypothesis_generator_args:
+  _target_: core.discovery.hypothesis_generator.HypothesisGeneratorAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a scientific hypothesis generation expert studying visual ecology data.
+    
+    The dataset contains VISUAL FEATURES extracted from ecology landscape images:
+    - Color features: color_warmth, green_fraction, blue_fraction, white_fraction, sky_grey_fraction
+    - Spatial features: horizon_height, terrain_roughness, upper_complexity
+    - Texture features: texture_energy, texture_uniformity
+    - Object count features: dark_blob_count, large_blob_count, small_blob_count, sky_dot_count
+    - Vegetation features: tree_count, vegetation_coverage
+    - Water features: water_body_area
+    
+    These features are extracted from images of ecology scenes with varying conditions.
+    Your task is to discover relationships between these visual properties.
+    
+    IMPORTANT: Look for NOVEL correlations and interactions between visual features.
+    For example: Do scenes with more green coverage also have more small animal blobs?
+    Is terrain roughness related to snow (white fraction)?
+    Do warmer scenes have different vegetation patterns?
+    
+    Focus on interactions, conditional effects, and non-obvious correlations.
+    Avoid re-testing known relationships listed in prior knowledge.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+# Experiment planner - designs statistical tests
+experiment_planner_args:
+  _target_: core.discovery.experiment_planner.ExperimentPlannerAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: "You are an experimental design expert. Plan rigorous experiments to test scientific hypotheses about visual features using appropriate statistical methods."
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+# Experiment runner (deterministic - no LLM)
+experiment_runner_args:
+  _target_: core.discovery.experiment_runner.ExperimentRunner
+
+# =========================================================================
+# INSIGHT STORAGE AND EVALUATION
+# =========================================================================
+
+insight_store_args:
+  _target_: core.discovery.insight_store.InsightStore
+  store_path: ${workspace_root}/insights.parquet
+
+# Tool router - executes statistical tests safely
+tool_router_args:
+  _target_: core.discovery.tool_router.ToolRouter
+  dataset: ${dataset_args}
+  allowed_tools:
+    - corr_test
+    - group_diff_test
+    - predictive_test
+    - cluster_and_enrich
+    - stratified_retest
+  max_samples: 5000
+  timeout: 120
+  use_local_execution: true
+
+# Insight evaluator
+insight_eval_args:
+  _target_: core.discovery.insight_evaluator.InsightEvaluator
+  llm_client: ${hypothesis_generator_args}
+  insight_store: ${insight_store_args}
+  thresholds:
+    min_effect_size: 0.15  # Slightly lower threshold for visual features (noisier)
+    max_p_value: 0.05
+    min_predictive_gain: 0.05
+    min_stability: 0.6
+  reward_weights:
+    strength: 1.0
+    novelty: 2.0
+    generalization: 1.5
+    redundancy: -0.5
+    confound: -1.0
+
+# =========================================================================
+# META-DISCOVERY
+# =========================================================================
+
+meta_discovery_args:
+  _target_: core.discovery.meta_discovery.MetaDiscoveryAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a meta-science analyst studying visual ecology data.
+    Analyze patterns across insights about visual features to discover
+    higher-level relationships. The visual features are extracted from
+    ecology landscape images and may reflect underlying ecological processes.
+    Help guide future hypothesis generation based on what has been learned.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+meta_step_frequency: 5
+meta_hypotheses_per_step: 2
+
+# =========================================================================
+# DISCOVERY RUNNER
+# =========================================================================
+
+enable_context_passing: true
+
+use_vision: true
+vision_n_images: 5
+vision_image_size: 512
+
+science_runner_args:
+  _target_: core.runners.discovery_mvp_runner.DiscoveryMVPRunner
+  workspace_root: ${workspace_root}
+  hypothesis_generator: ${hypothesis_generator_args}
+  experiment_planner: ${experiment_planner_args}
+  experiment_runner: ${experiment_runner_args}
+  insight_evaluator: ${insight_eval_args}
+  insight_store: ${insight_store_args}
+  dataset: ${dataset_args}
+  tool_router: ${tool_router_args}
+  max_retries: 3
+  meta_discovery_agent: ${meta_discovery_args}
+  meta_step_frequency: ${meta_step_frequency}
+  meta_hypotheses_per_step: ${meta_hypotheses_per_step}
+  enable_context_passing: ${enable_context_passing}
+  use_vision: ${use_vision}
+  vision_n_images: ${vision_n_images}
+  vision_image_size: ${vision_image_size}

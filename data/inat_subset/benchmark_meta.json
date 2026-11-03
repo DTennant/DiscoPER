@@ -1,0 +1,51 @@
+{
+  "name": "iNaturalist Ecology Subset",
+  "n_species": 8,
+  "n_per_species": 100,
+  "total_observations": 800,
+  "total_photos_downloaded": 800,
+  "seed": 42,
+  "species": [
+    {
+      "taxon_id": 48662,
+      "scientific_name": "Danaus plexippus",
+      "common_name": "Monarch Butterfly"
+    },
+    {
+      "taxon_id": 47219,
+      "scientific_name": "Helianthus annuus",
+      "common_name": "Common Sunflower"
+    },
+    {
+      "taxon_id": 42048,
+      "scientific_name": "Vulpes vulpes",
+      "common_name": "Red Fox"
+    },
+    {
+      "taxon_id": 47394,
+      "scientific_name": "Amanita muscaria",
+      "common_name": "Fly Agaric"
+    },
+    {
+      "taxon_id": 9082,
+      "scientific_name": "Hirundo rustica",
+      "common_name": "Barn Swallow"
+    },
+    {
+      "taxon_id": 47602,
+      "scientific_name": "Taraxacum officinale",
+      "common_name": "Common Dandelion"
+    },
+    {
+      "taxon_id": 12727,
+      "scientific_name": "Turdus migratorius",
+      "common_name": "American Robin"
+    },
+    {
+      "taxon_id": 42184,
+      "scientific_name": "Cervus elaphus",
+      "common_name": "Red Deer"
+    }
+  ],
+  "ground_truth_patterns": 12
+}

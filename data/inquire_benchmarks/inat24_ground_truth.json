@@ -1,0 +1,188 @@
+{
+  "dataset": "inat24_50k",
+  "description": "Ground truth patterns for 50K-sample iNaturalist 2024 dataset",
+  "n_observations": 50000,
+  "n_species": 9776,
+  "patterns": [
+    {
+      "id": "prior_observer_bias",
+      "tier": "prior",
+      "difficulty": "simple",
+      "description": "Observations are concentrated in North America and Europe due to iNaturalist user demographics",
+      "variables": [
+        "latitude",
+        "longitude"
+      ],
+      "pattern_type": "group_difference"
+    },
+    {
+      "id": "prior_taxonomic_diversity",
+      "tier": "prior",
+      "difficulty": "simple",
+      "description": "Dataset spans 3 kingdoms (Animalia, Plantae, Fungi) with Animalia being the largest",
+      "variables": [
+        "kingdom"
+      ],
+      "pattern_type": "group_difference"
+    },
+    {
+      "id": "obvious_seasonal_peak",
+      "tier": "obvious",
+      "difficulty": "simple",
+      "description": "Observations peak in May-September in the Northern Hemisphere (citizen science activity bias)",
+      "variables": [
+        "month",
+        "hemisphere"
+      ],
+      "pattern_type": "correlation"
+    },
+    {
+      "id": "fungi_autumn_peak",
+      "tier": "novel",
+      "difficulty": "simple",
+      "description": "Fungi observations are concentrated in September-November, reflecting fruiting body seasonality",
+      "variables": [
+        "kingdom",
+        "month"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Woodland Trust Nature Calendar; Farmatsiia (2020)"
+    },
+    {
+      "id": "plant_spring_bias",
+      "tier": "novel",
+      "difficulty": "simple",
+      "description": "Plant observations peak earlier in the year (Apr-Jun) than animal observations (May-Aug)",
+      "variables": [
+        "kingdom",
+        "month"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Phenological ecology literature"
+    },
+    {
+      "id": "insecta_tropical_concentration",
+      "tier": "novel",
+      "difficulty": "simple",
+      "description": "Insect observations are more concentrated in tropical latitudes (<30 degrees) compared to mammals",
+      "variables": [
+        "class",
+        "abs_latitude"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Global insect distribution literature"
+    },
+    {
+      "id": "bird_latitude_season_migration",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Bird observations shift northward from spring to summer in the Northern Hemisphere, reflecting migration",
+      "variables": [
+        "class",
+        "latitude",
+        "month"
+      ],
+      "pattern_type": "correlation",
+      "citation": "Neate-Clegg et al. (2024) Nat. Ecol. Evol."
+    },
+    {
+      "id": "amphibian_spring_emergence",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Amphibian observations show a sharp spring peak (March-May) driven by breeding season emergence",
+      "variables": [
+        "class",
+        "month"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Herpetological phenology literature"
+    },
+    {
+      "id": "lepidoptera_latitude_range",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Lepidoptera (butterflies/moths) show a wider latitudinal range than other insect orders",
+      "variables": [
+        "order",
+        "abs_latitude"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Butterfly distribution ecology"
+    },
+    {
+      "id": "fungi_temperate_concentration",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Fungi observations are more concentrated in temperate zones (40-60N) compared to animals and plants",
+      "variables": [
+        "kingdom",
+        "abs_latitude"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Int. J. Biometeorol. 67:1509-1522 (2023)"
+    },
+    {
+      "id": "mammal_crepuscular_pattern",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mammal observations are more evenly distributed across months than bird observations, reflecting lower seasonal activity variation",
+      "variables": [
+        "class",
+        "month"
+      ],
+      "pattern_type": "group_difference",
+      "citation": "Mammalian activity pattern literature"
+    },
+    {
+      "id": "hemisphere_season_inversion",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Seasonal observation patterns invert between Northern and Southern hemispheres across all kingdoms",
+      "variables": [
+        "hemisphere",
+        "month",
+        "kingdom"
+      ],
+      "pattern_type": "three_way_interaction",
+      "citation": "Int. J. Biometeorol. 67:1509-1522 (2023)"
+    },
+    {
+      "id": "latitude_species_richness_gradient",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Species richness per unit area increases toward the equator, following the latitudinal diversity gradient",
+      "variables": [
+        "abs_latitude",
+        "species_name"
+      ],
+      "pattern_type": "correlation",
+      "citation": "Hillebrand (2004) Am. Nat. 163:192-211"
+    },
+    {
+      "id": "family_level_biogeography",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Certain families show strong continental endemism (e.g., Didelphidae in Americas, Phasianidae concentration in Asia)",
+      "variables": [
+        "family",
+        "longitude",
+        "latitude"
+      ],
+      "pattern_type": "spatial_cluster",
+      "citation": "Biogeography textbooks (Lomolino et al.)"
+    },
+    {
+      "id": "elevation_proxy_via_latitude",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Plant families associated with alpine/montane habitats show higher-latitude observations in mid-latitudes",
+      "variables": [
+        "family",
+        "abs_latitude",
+        "kingdom"
+      ],
+      "pattern_type": "conditional_confound",
+      "citation": "Alpine ecology literature"
+    }
+  ]
+}

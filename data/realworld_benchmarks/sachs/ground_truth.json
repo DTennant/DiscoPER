@@ -1,0 +1,1427 @@
+{
+  "dataset_id": "sachs",
+  "seed": 42,
+  "n_samples": 7466,
+  "generation_method": "realworld_causal_dag",
+  "feature_schema": {
+    "variables": [
+      "Raf",
+      "Mek",
+      "Plcg",
+      "PIP2",
+      "PIP3",
+      "Erk",
+      "Akt",
+      "PKA",
+      "PKC",
+      "P38",
+      "Jnk"
+    ],
+    "n_nodes": 11,
+    "n_edges": 17
+  },
+  "patterns": [
+    {
+      "id": "surface_Raf_Plcg",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Raf and Plcg (r=0.24)",
+      "variables": [
+        "Raf",
+        "Plcg"
+      ],
+      "effect": 0.24196389301164245,
+      "effect_size": 0.24196389301164245
+    },
+    {
+      "id": "surface_Raf_PIP2",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Raf and PIP2 (r=0.22)",
+      "variables": [
+        "Raf",
+        "PIP2"
+      ],
+      "effect": 0.21524722826994538,
+      "effect_size": 0.21524722826994538
+    },
+    {
+      "id": "surface_Raf_Akt",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Raf and Akt (r=0.27)",
+      "variables": [
+        "Raf",
+        "Akt"
+      ],
+      "effect": 0.2738033860636493,
+      "effect_size": 0.2738033860636493
+    },
+    {
+      "id": "surface_Raf_P38",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Raf and P38 (r=0.22)",
+      "variables": [
+        "Raf",
+        "P38"
+      ],
+      "effect": 0.21869829787205108,
+      "effect_size": 0.21869829787205108
+    },
+    {
+      "id": "surface_Raf_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Raf and Jnk (r=0.19)",
+      "variables": [
+        "Raf",
+        "Jnk"
+      ],
+      "effect": 0.19268868803436862,
+      "effect_size": 0.19268868803436862
+    },
+    {
+      "id": "surface_Mek_Plcg",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Mek and Plcg (r=0.27)",
+      "variables": [
+        "Mek",
+        "Plcg"
+      ],
+      "effect": 0.2711032801217534,
+      "effect_size": 0.2711032801217534
+    },
+    {
+      "id": "surface_Mek_PIP2",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Mek and PIP2 (r=0.24)",
+      "variables": [
+        "Mek",
+        "PIP2"
+      ],
+      "effect": 0.24144280544465158,
+      "effect_size": 0.24144280544465158
+    },
+    {
+      "id": "surface_Mek_Akt",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Mek and Akt (r=0.31)",
+      "variables": [
+        "Mek",
+        "Akt"
+      ],
+      "effect": 0.30944768461584155,
+      "effect_size": 0.30944768461584155
+    },
+    {
+      "id": "surface_Mek_P38",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Mek and P38 (r=0.24)",
+      "variables": [
+        "Mek",
+        "P38"
+      ],
+      "effect": 0.2445547276559146,
+      "effect_size": 0.2445547276559146
+    },
+    {
+      "id": "surface_Mek_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Mek and Jnk (r=0.22)",
+      "variables": [
+        "Mek",
+        "Jnk"
+      ],
+      "effect": 0.22140893714174187,
+      "effect_size": 0.22140893714174187
+    },
+    {
+      "id": "surface_Plcg_Erk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Plcg and Erk (r=0.15)",
+      "variables": [
+        "Plcg",
+        "Erk"
+      ],
+      "effect": 0.15302680437208166,
+      "effect_size": 0.15302680437208166
+    },
+    {
+      "id": "surface_Plcg_Akt",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Plcg and Akt (r=0.44)",
+      "variables": [
+        "Plcg",
+        "Akt"
+      ],
+      "effect": 0.44297340858272694,
+      "effect_size": 0.44297340858272694
+    },
+    {
+      "id": "surface_Plcg_PKA",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Plcg and PKA (r=-0.19)",
+      "variables": [
+        "Plcg",
+        "PKA"
+      ],
+      "effect": -0.19325155445910078,
+      "effect_size": -0.19325155445910078
+    },
+    {
+      "id": "surface_Plcg_PKC",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Plcg and PKC (r=0.36)",
+      "variables": [
+        "Plcg",
+        "PKC"
+      ],
+      "effect": 0.3554859317424968,
+      "effect_size": 0.3554859317424968
+    },
+    {
+      "id": "surface_Plcg_P38",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Plcg and P38 (r=0.38)",
+      "variables": [
+        "Plcg",
+        "P38"
+      ],
+      "effect": 0.3779674263810593,
+      "effect_size": 0.3779674263810593
+    },
+    {
+      "id": "surface_Plcg_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Plcg and Jnk (r=0.41)",
+      "variables": [
+        "Plcg",
+        "Jnk"
+      ],
+      "effect": 0.4102396666552613,
+      "effect_size": 0.4102396666552613
+    },
+    {
+      "id": "surface_PIP2_Akt",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between PIP2 and Akt (r=0.41)",
+      "variables": [
+        "PIP2",
+        "Akt"
+      ],
+      "effect": 0.4088492333827845,
+      "effect_size": 0.4088492333827845
+    },
+    {
+      "id": "surface_PIP2_PKA",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between PIP2 and PKA (r=-0.18)",
+      "variables": [
+        "PIP2",
+        "PKA"
+      ],
+      "effect": -0.17713007491972454,
+      "effect_size": -0.17713007491972454
+    },
+    {
+      "id": "surface_PIP2_PKC",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between PIP2 and PKC (r=0.34)",
+      "variables": [
+        "PIP2",
+        "PKC"
+      ],
+      "effect": 0.33704695050187233,
+      "effect_size": 0.33704695050187233
+    },
+    {
+      "id": "surface_PIP2_P38",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between PIP2 and P38 (r=0.36)",
+      "variables": [
+        "PIP2",
+        "P38"
+      ],
+      "effect": 0.3566153377151877,
+      "effect_size": 0.3566153377151877
+    },
+    {
+      "id": "surface_PIP2_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between PIP2 and Jnk (r=0.38)",
+      "variables": [
+        "PIP2",
+        "Jnk"
+      ],
+      "effect": 0.3826923508378824,
+      "effect_size": 0.3826923508378824
+    },
+    {
+      "id": "surface_Erk_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Erk and Jnk (r=0.16)",
+      "variables": [
+        "Erk",
+        "Jnk"
+      ],
+      "effect": 0.1561587376899589,
+      "effect_size": 0.1561587376899589
+    },
+    {
+      "id": "surface_Akt_PKC",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Akt and PKC (r=0.38)",
+      "variables": [
+        "Akt",
+        "PKC"
+      ],
+      "effect": 0.3793508342990197,
+      "effect_size": 0.3793508342990197
+    },
+    {
+      "id": "surface_Akt_P38",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Akt and P38 (r=0.40)",
+      "variables": [
+        "Akt",
+        "P38"
+      ],
+      "effect": 0.40111215268573847,
+      "effect_size": 0.40111215268573847
+    },
+    {
+      "id": "surface_Akt_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between Akt and Jnk (r=0.44)",
+      "variables": [
+        "Akt",
+        "Jnk"
+      ],
+      "effect": 0.4401618596542693,
+      "effect_size": 0.4401618596542693
+    },
+    {
+      "id": "surface_P38_Jnk",
+      "type": "correlation",
+      "tier": "obvious",
+      "description": "Surface correlation between P38 and Jnk (r=0.80)",
+      "variables": [
+        "P38",
+        "Jnk"
+      ],
+      "effect": 0.7984759798232641,
+      "effect_size": 0.7984759798232641
+    },
+    {
+      "id": "direct_Erk_Akt",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "Erk",
+        "Akt"
+      ],
+      "effect": 0.6873251528878959,
+      "effect_size": 0.6873251528878959,
+      "description": "Direct causal edge: Erk -> Akt (r=0.687, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "Erk",
+        "PKA"
+      ],
+      "outcome": "Akt",
+      "interaction_effect": 0.6873251528878959
+    },
+    {
+      "id": "direct_Mek_Erk",
+      "type": "two_way_interaction",
+      "tier": "prior_knowledge",
+      "variables": [
+        "Mek",
+        "Erk"
+      ],
+      "effect": 0.03961065612872367,
+      "effect_size": 0.03961065612872367,
+      "description": "Direct causal edge: Mek -> Erk (r=0.040, type=two_way_interaction)",
+      "predictors": [
+        "Mek",
+        "PKA"
+      ],
+      "outcome": "Erk",
+      "interaction_effect": 0.03961065612872367
+    },
+    {
+      "id": "direct_PIP3_PIP2",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PIP3",
+        "PIP2"
+      ],
+      "effect": 0.19505710968073695,
+      "effect_size": 0.19505710968073695,
+      "description": "Direct causal edge: PIP3 -> PIP2 (r=0.195, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PIP3",
+        "Plcg"
+      ],
+      "outcome": "PIP2",
+      "interaction_effect": 0.19505710968073695
+    },
+    {
+      "id": "direct_PKA_Akt",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKA",
+        "Akt"
+      ],
+      "effect": -0.012466546171990153,
+      "effect_size": -0.012466546171990153,
+      "description": "Direct causal edge: PKA -> Akt (r=-0.012, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKA",
+        "Erk"
+      ],
+      "outcome": "Akt",
+      "interaction_effect": 0.012466546171990153
+    },
+    {
+      "id": "direct_PKA_Erk",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKA",
+        "Erk"
+      ],
+      "effect": 0.22146135405888037,
+      "effect_size": 0.22146135405888037,
+      "description": "Direct causal edge: PKA -> Erk (r=0.221, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKA",
+        "Mek"
+      ],
+      "outcome": "Erk",
+      "interaction_effect": 0.22146135405888037
+    },
+    {
+      "id": "direct_PKA_Jnk",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKA",
+        "Jnk"
+      ],
+      "effect": -0.17850579201986103,
+      "effect_size": -0.17850579201986103,
+      "description": "Direct causal edge: PKA -> Jnk (r=-0.179, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "Jnk",
+      "interaction_effect": 0.17850579201986103
+    },
+    {
+      "id": "direct_PKA_Mek",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKA",
+        "Mek"
+      ],
+      "effect": -0.15999375832145998,
+      "effect_size": -0.15999375832145998,
+      "description": "Direct causal edge: PKA -> Mek (r=-0.160, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "Mek",
+      "interaction_effect": 0.15999375832145998
+    },
+    {
+      "id": "direct_PKA_P38",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKA",
+        "P38"
+      ],
+      "effect": -0.18148619515403316,
+      "effect_size": -0.18148619515403316,
+      "description": "Direct causal edge: PKA -> P38 (r=-0.181, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "P38",
+      "interaction_effect": 0.18148619515403316
+    },
+    {
+      "id": "direct_PKA_Raf",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKA",
+        "Raf"
+      ],
+      "effect": -0.14710173519725353,
+      "effect_size": -0.14710173519725353,
+      "description": "Direct causal edge: PKA -> Raf (r=-0.147, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "Raf",
+      "interaction_effect": 0.14710173519725353
+    },
+    {
+      "id": "direct_Raf_Mek",
+      "type": "two_way_interaction",
+      "tier": "prior_knowledge",
+      "variables": [
+        "Raf",
+        "Mek"
+      ],
+      "effect": 0.990238370110383,
+      "effect_size": 0.990238370110383,
+      "description": "Direct causal edge: Raf -> Mek (r=0.990, type=two_way_interaction)",
+      "predictors": [
+        "Raf",
+        "PKA"
+      ],
+      "outcome": "Mek",
+      "interaction_effect": 0.990238370110383
+    },
+    {
+      "id": "direct_PKC_Jnk",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKC",
+        "Jnk"
+      ],
+      "effect": 0.8139991836723077,
+      "effect_size": 0.8139991836723077,
+      "description": "Direct causal edge: PKC -> Jnk (r=0.814, type=two_way_interaction)",
+      "difficulty": "moderate",
+      "predictors": [
+        "PKC",
+        "PKA"
+      ],
+      "outcome": "Jnk",
+      "interaction_effect": 0.8139991836723077
+    },
+    {
+      "id": "direct_PKC_Mek",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKC",
+        "Mek"
+      ],
+      "effect": 0.21872486554889656,
+      "effect_size": 0.21872486554889656,
+      "description": "Direct causal edge: PKC -> Mek (r=0.219, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKC",
+        "PKA"
+      ],
+      "outcome": "Mek",
+      "interaction_effect": 0.21872486554889656
+    },
+    {
+      "id": "direct_PKC_P38",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKC",
+        "P38"
+      ],
+      "effect": 0.9589209470328462,
+      "effect_size": 0.9589209470328462,
+      "description": "Direct causal edge: PKC -> P38 (r=0.959, type=two_way_interaction)",
+      "difficulty": "moderate",
+      "predictors": [
+        "PKC",
+        "PKA"
+      ],
+      "outcome": "P38",
+      "interaction_effect": 0.9589209470328462
+    },
+    {
+      "id": "direct_PKC_PKA",
+      "type": "correlation",
+      "tier": "novel",
+      "variables": [
+        "PKC",
+        "PKA"
+      ],
+      "effect": -0.15938165245501226,
+      "effect_size": -0.15938165245501226,
+      "description": "Direct causal edge: PKC -> PKA (r=-0.159, type=correlation)",
+      "difficulty": "complex"
+    },
+    {
+      "id": "direct_PKC_Raf",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "variables": [
+        "PKC",
+        "Raf"
+      ],
+      "effect": 0.19404498512918322,
+      "effect_size": 0.19404498512918322,
+      "description": "Direct causal edge: PKC -> Raf (r=0.194, type=two_way_interaction)",
+      "difficulty": "complex",
+      "predictors": [
+        "PKC",
+        "PKA"
+      ],
+      "outcome": "Raf",
+      "interaction_effect": 0.19404498512918322
+    },
+    {
+      "id": "direct_Plcg_PIP2",
+      "type": "two_way_interaction",
+      "tier": "prior_knowledge",
+      "variables": [
+        "Plcg",
+        "PIP2"
+      ],
+      "effect": 0.9262333949401919,
+      "effect_size": 0.9262333949401919,
+      "description": "Direct causal edge: Plcg -> PIP2 (r=0.926, type=two_way_interaction)",
+      "predictors": [
+        "Plcg",
+        "PIP3"
+      ],
+      "outcome": "PIP2",
+      "interaction_effect": 0.9262333949401919
+    },
+    {
+      "id": "direct_Plcg_PIP3",
+      "type": "correlation",
+      "tier": "prior_knowledge",
+      "variables": [
+        "Plcg",
+        "PIP3"
+      ],
+      "effect": 0.08695517481030651,
+      "effect_size": 0.08695517481030651,
+      "description": "Direct causal edge: Plcg -> PIP3 (r=0.087, type=correlation)"
+    },
+    {
+      "id": "chain_PKC_Mek_Erk",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> Mek -> Erk (indirect effect = 0.009)",
+      "chain": [
+        "PKC",
+        "Mek",
+        "Erk"
+      ],
+      "direct_effects": [
+        0.21872486554889656,
+        0.03961065612872367
+      ],
+      "indirect_effect": 0.008663835436058661
+    },
+    {
+      "id": "chain_PKC_PKA_Erk",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> PKA -> Erk (indirect effect = -0.035)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Erk"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        0.22146135405888037
+      ],
+      "indirect_effect": -0.03529687656482889
+    },
+    {
+      "id": "chain_PKC_PKA_Mek_Erk",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> PKA -> Mek -> Erk (indirect effect = 0.001)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Mek",
+        "Erk"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.15999375832145998,
+        0.03961065612872367
+      ],
+      "indirect_effect": 0.0010100744875409288
+    },
+    {
+      "id": "chain_PKC_PKA_Raf_Mek_Erk",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> PKA -> Raf -> Mek -> Erk (indirect effect = 0.001)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Raf",
+        "Mek",
+        "Erk"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.14710173519725353,
+        0.990238370110383,
+        0.03961065612872367
+      ],
+      "indirect_effect": 0.0009196189411181543
+    },
+    {
+      "id": "chain_PKC_Raf_Mek_Erk",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> Raf -> Mek -> Erk (indirect effect = 0.008)",
+      "chain": [
+        "PKC",
+        "Raf",
+        "Mek",
+        "Erk"
+      ],
+      "direct_effects": [
+        0.19404498512918322,
+        0.990238370110383,
+        0.03961065612872367
+      ],
+      "indirect_effect": 0.0076112188597261595
+    },
+    {
+      "id": "chain_PKC_PKA_Jnk",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> PKA -> Jnk (indirect effect = 0.028)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Jnk"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.17850579201986103
+      ],
+      "indirect_effect": 0.028450548104916193
+    },
+    {
+      "id": "chain_PKC_PKA_P38",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> PKA -> P38 (indirect effect = 0.029)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "P38"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.18148619515403316
+      ],
+      "indirect_effect": 0.028925569681422646
+    },
+    {
+      "id": "chain_PKC_Mek_Erk_Akt",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> Mek -> Erk -> Akt (indirect effect = 0.006)",
+      "chain": [
+        "PKC",
+        "Mek",
+        "Erk",
+        "Akt"
+      ],
+      "direct_effects": [
+        0.21872486554889656,
+        0.03961065612872367,
+        0.6873251528878959
+      ],
+      "indirect_effect": 0.005954872015684589
+    },
+    {
+      "id": "chain_PKC_PKA_Akt",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> PKA -> Akt (indirect effect = 0.002)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Akt"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.012466546171990153
+      ],
+      "indirect_effect": 0.001986938729298498
+    },
+    {
+      "id": "chain_PKC_PKA_Erk_Akt",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> PKA -> Erk -> Akt (indirect effect = -0.024)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Erk",
+        "Akt"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        0.22146135405888037,
+        0.6873251528878959
+      ],
+      "indirect_effect": -0.024260431081386206
+    },
+    {
+      "id": "chain_PKC_PKA_Mek_Erk_Akt",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> PKA -> Mek -> Erk -> Akt (indirect effect = 0.001)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Mek",
+        "Erk",
+        "Akt"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.15999375832145998,
+        0.03961065612872367,
+        0.6873251528878959
+      ],
+      "indirect_effect": 0.0006942496015772319
+    },
+    {
+      "id": "chain_PKC_PKA_Raf_Mek_Erk_Akt",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> PKA -> Raf -> Mek -> Erk -> Akt (indirect effect = 0.001)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Raf",
+        "Mek",
+        "Erk",
+        "Akt"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.14710173519725353,
+        0.990238370110383,
+        0.03961065612872367,
+        0.6873251528878959
+      ],
+      "indirect_effect": 0.0006320772293026403
+    },
+    {
+      "id": "chain_PKC_Raf_Mek_Erk_Akt",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> Raf -> Mek -> Erk -> Akt (indirect effect = 0.005)",
+      "chain": [
+        "PKC",
+        "Raf",
+        "Mek",
+        "Erk",
+        "Akt"
+      ],
+      "direct_effects": [
+        0.19404498512918322,
+        0.990238370110383,
+        0.03961065612872367,
+        0.6873251528878959
+      ],
+      "indirect_effect": 0.005231382166424519
+    },
+    {
+      "id": "chain_PKC_PKA_Raf",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> PKA -> Raf (indirect effect = 0.023)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Raf"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.14710173519725353
+      ],
+      "indirect_effect": 0.02344531763473791
+    },
+    {
+      "id": "chain_PKC_PKA_Mek",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> PKA -> Mek (indirect effect = 0.026)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Mek"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.15999375832145998
+      ],
+      "indirect_effect": 0.02550006958376216
+    },
+    {
+      "id": "chain_PKC_PKA_Raf_Mek",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Mediation chain: PKC -> PKA -> Raf -> Mek (indirect effect = 0.023)",
+      "chain": [
+        "PKC",
+        "PKA",
+        "Raf",
+        "Mek"
+      ],
+      "direct_effects": [
+        -0.15938165245501226,
+        -0.14710173519725353,
+        0.990238370110383
+      ],
+      "indirect_effect": 0.023216453121343086
+    },
+    {
+      "id": "chain_PKC_Raf_Mek",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: PKC -> Raf -> Mek (indirect effect = 0.192)",
+      "chain": [
+        "PKC",
+        "Raf",
+        "Mek"
+      ],
+      "direct_effects": [
+        0.19404498512918322,
+        0.990238370110383
+      ],
+      "indirect_effect": 0.1921507898024159
+    },
+    {
+      "id": "chain_Plcg_PIP3_PIP2",
+      "type": "mediation_chain",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Mediation chain: Plcg -> PIP3 -> PIP2 (indirect effect = 0.017)",
+      "chain": [
+        "Plcg",
+        "PIP3",
+        "PIP2"
+      ],
+      "direct_effects": [
+        0.08695517481030651,
+        0.19505710968073695
+      ],
+      "indirect_effect": 0.01696122507028161
+    },
+    {
+      "id": "confound_PKA_Akt_Jnk",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Akt and Jnk appear correlated (r=0.44) due to common cause PKA (partial r=0.45)",
+      "apparent_vars": [
+        "Akt",
+        "Jnk"
+      ],
+      "apparent_correlation": [
+        "Akt",
+        "Jnk"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.4401618596542693,
+      "true_effect": 0.4451196727540331
+    },
+    {
+      "id": "confound_PKA_Akt_Mek",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Akt and Mek appear correlated (r=0.31) due to common cause PKA (partial r=0.31)",
+      "apparent_vars": [
+        "Akt",
+        "Mek"
+      ],
+      "apparent_correlation": [
+        "Akt",
+        "Mek"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.30944768461584155,
+      "true_effect": 0.3114896102574321
+    },
+    {
+      "id": "confound_PKA_Akt_P38",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Akt and P38 appear correlated (r=0.40) due to common cause PKA (partial r=0.41)",
+      "apparent_vars": [
+        "Akt",
+        "P38"
+      ],
+      "apparent_correlation": [
+        "Akt",
+        "P38"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.40111215268573847,
+      "true_effect": 0.4056165175980713
+    },
+    {
+      "id": "confound_PKA_Akt_Raf",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Akt and Raf appear correlated (r=0.27) due to common cause PKA (partial r=0.27)",
+      "apparent_vars": [
+        "Akt",
+        "Raf"
+      ],
+      "apparent_correlation": [
+        "Akt",
+        "Raf"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.2738033860636493,
+      "true_effect": 0.27498210123877914
+    },
+    {
+      "id": "confound_PKA_Erk_Jnk",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Erk and Jnk appear correlated (r=0.16) due to common cause PKA (partial r=0.20)",
+      "apparent_vars": [
+        "Erk",
+        "Jnk"
+      ],
+      "apparent_correlation": [
+        "Erk",
+        "Jnk"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.1561587376899589,
+      "true_effect": 0.20394943288680706
+    },
+    {
+      "id": "confound_PKA_Erk_P38",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Erk and P38 appear correlated (r=0.14) due to common cause PKA (partial r=0.18)",
+      "apparent_vars": [
+        "Erk",
+        "P38"
+      ],
+      "apparent_correlation": [
+        "Erk",
+        "P38"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.13565132461603452,
+      "true_effect": 0.1833660982540932
+    },
+    {
+      "id": "confound_PKA_Jnk_Mek",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Jnk and Mek appear correlated (r=0.22) due to common cause PKA (partial r=0.20)",
+      "apparent_vars": [
+        "Jnk",
+        "Mek"
+      ],
+      "apparent_correlation": [
+        "Jnk",
+        "Mek"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.22140893714174187,
+      "true_effect": 0.19855483889348083
+    },
+    {
+      "id": "confound_PKA_Jnk_P38",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Jnk and P38 appear correlated (r=0.80) due to common cause PKA (partial r=0.79)",
+      "apparent_vars": [
+        "Jnk",
+        "P38"
+      ],
+      "apparent_correlation": [
+        "Jnk",
+        "P38"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.7984759798232641,
+      "true_effect": 0.7917325101786477
+    },
+    {
+      "id": "confound_PKA_Jnk_Raf",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Jnk and Raf appear correlated (r=0.19) due to common cause PKA (partial r=0.17)",
+      "apparent_vars": [
+        "Jnk",
+        "Raf"
+      ],
+      "apparent_correlation": [
+        "Jnk",
+        "Raf"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.1926886880343686,
+      "true_effect": 0.17100719204495435
+    },
+    {
+      "id": "confound_PKA_Mek_P38",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Mek and P38 appear correlated (r=0.24) due to common cause PKA (partial r=0.22)",
+      "apparent_vars": [
+        "Mek",
+        "P38"
+      ],
+      "apparent_correlation": [
+        "Mek",
+        "P38"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.2445547276559146,
+      "true_effect": 0.22201753415548728
+    },
+    {
+      "id": "confound_PKA_P38_Raf",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: P38 and Raf appear correlated (r=0.22) due to common cause PKA (partial r=0.20)",
+      "apparent_vars": [
+        "P38",
+        "Raf"
+      ],
+      "apparent_correlation": [
+        "P38",
+        "Raf"
+      ],
+      "confound": "PKA",
+      "apparent_effect": 0.2186982978720511,
+      "true_effect": 0.1973910237071376
+    },
+    {
+      "id": "latent_PKA",
+      "type": "latent_variable",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Latent variable: Akt, Erk, Jnk, Mek, P38, Raf correlate due to common factor PKA",
+      "observed_vars": [
+        "Akt",
+        "Erk",
+        "Jnk",
+        "Mek",
+        "P38",
+        "Raf"
+      ],
+      "latent_var": "PKA"
+    },
+    {
+      "id": "confound_PKC_Jnk_Mek",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Jnk and Mek appear correlated (r=0.22) due to common cause PKC (partial r=0.08)",
+      "apparent_vars": [
+        "Jnk",
+        "Mek"
+      ],
+      "apparent_correlation": [
+        "Jnk",
+        "Mek"
+      ],
+      "confound": "PKC",
+      "apparent_effect": 0.22140893714174187,
+      "true_effect": 0.07651195983584701
+    },
+    {
+      "id": "confound_PKC_Jnk_P38",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Jnk and P38 appear correlated (r=0.80) due to common cause PKC (partial r=0.11)",
+      "apparent_vars": [
+        "Jnk",
+        "P38"
+      ],
+      "apparent_correlation": [
+        "Jnk",
+        "P38"
+      ],
+      "confound": "PKC",
+      "apparent_effect": 0.7984759798232641,
+      "true_effect": 0.10872386578682676
+    },
+    {
+      "id": "confound_PKC_Jnk_Raf",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Jnk and Raf appear correlated (r=0.19) due to common cause PKC (partial r=0.06)",
+      "apparent_vars": [
+        "Jnk",
+        "Raf"
+      ],
+      "apparent_correlation": [
+        "Jnk",
+        "Raf"
+      ],
+      "confound": "PKC",
+      "apparent_effect": 0.1926886880343686,
+      "true_effect": 0.06095943727166452
+    },
+    {
+      "id": "confound_PKC_Mek_P38",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: Mek and P38 appear correlated (r=0.24) due to common cause PKC (partial r=0.13)",
+      "apparent_vars": [
+        "Mek",
+        "P38"
+      ],
+      "apparent_correlation": [
+        "Mek",
+        "P38"
+      ],
+      "confound": "PKC",
+      "apparent_effect": 0.2445547276559146,
+      "true_effect": 0.12577412498074494
+    },
+    {
+      "id": "confound_PKC_P38_Raf",
+      "type": "conditional_confound",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Confound: P38 and Raf appear correlated (r=0.22) due to common cause PKC (partial r=0.12)",
+      "apparent_vars": [
+        "P38",
+        "Raf"
+      ],
+      "apparent_correlation": [
+        "P38",
+        "Raf"
+      ],
+      "confound": "PKC",
+      "apparent_effect": 0.2186982978720511,
+      "true_effect": 0.11723557343662301
+    },
+    {
+      "id": "latent_PKC",
+      "type": "latent_variable",
+      "tier": "novel",
+      "difficulty": "complex",
+      "description": "Latent variable: Jnk, Mek, P38, PKA, Raf correlate due to common factor PKC",
+      "observed_vars": [
+        "Jnk",
+        "Mek",
+        "P38",
+        "PKA",
+        "Raf"
+      ],
+      "latent_var": "PKC"
+    },
+    {
+      "id": "interaction_Mek_PKA_Erk",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: Mek x PKA -> Erk (significant interaction term)",
+      "predictors": [
+        "Mek",
+        "PKA"
+      ],
+      "outcome": "Erk"
+    },
+    {
+      "id": "interaction_Erk_PKA_Akt",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: Erk x PKA -> Akt (significant interaction term)",
+      "predictors": [
+        "Erk",
+        "PKA"
+      ],
+      "outcome": "Akt"
+    },
+    {
+      "id": "interaction_PKA_PKC_Mek",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: PKA x PKC -> Mek (significant interaction term)",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "Mek"
+    },
+    {
+      "id": "interaction_PKA_Raf_Mek",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: PKA x Raf -> Mek (significant interaction term)",
+      "predictors": [
+        "PKA",
+        "Raf"
+      ],
+      "outcome": "Mek"
+    },
+    {
+      "id": "interaction_PIP3_Plcg_PIP2",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: PIP3 x Plcg -> PIP2 (significant interaction term)",
+      "predictors": [
+        "PIP3",
+        "Plcg"
+      ],
+      "outcome": "PIP2"
+    },
+    {
+      "id": "interaction_PKA_PKC_Jnk",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: PKA x PKC -> Jnk (significant interaction term)",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "Jnk"
+    },
+    {
+      "id": "interaction_PKA_PKC_P38",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: PKA x PKC -> P38 (significant interaction term)",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "P38"
+    },
+    {
+      "id": "interaction_PKA_PKC_Raf",
+      "type": "two_way_interaction",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "description": "Interaction: PKA x PKC -> Raf (significant interaction term)",
+      "predictors": [
+        "PKA",
+        "PKC"
+      ],
+      "outcome": "Raf"
+    }
+  ],
+  "evaluation_criteria": {
+    "scoring": {
+      "prior_rediscovery": -1.0,
+      "obvious_rediscovery": -0.5,
+      "novel_simple_found": 0.5,
+      "novel_moderate_found": 1.0,
+      "novel_complex_found": 2.0
+    },
+    "matching": {
+      "variable_overlap_threshold": 0.5,
+      "effect_direction_must_match": true,
+      "llm_semantic_matching": true
+    }
+  },
+  "include_prior_in_prompt": true,
+  "prior_prompt_detail": "full",
+  "metadata": {
+    "domain": "molecular_biology",
+    "reference_paper": "Sachs et al. (2005) Science 308:523-529",
+    "data_source": "cdt_sachs",
+    "variable_descriptions": {
+      "Raf": "Raf kinase activity",
+      "Mek": "MEK1/2 kinase activity",
+      "Erk": "ERK1/2 kinase activity",
+      "Akt": "Akt kinase activity (S473 phosphorylation)",
+      "PKA": "Protein kinase A activity",
+      "PKC": "Protein kinase C activity",
+      "P38": "p38 MAPK activity",
+      "Jnk": "JNK kinase activity",
+      "Plcg": "Phospholipase C-gamma activity",
+      "PIP2": "Phosphatidylinositol 4,5-bisphosphate level",
+      "PIP3": "Phosphatidylinositol 3,4,5-trisphosphate level"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+# Easy Benchmark Configuration
+# - Fewer patterns, stronger effects
+# - 2 prior knowledge, 2 obvious, 2 novel patterns
+# - Novel patterns: 1 simple, 1 moderate
+
+benchmark:
+  name: ecology_easy
+  seed: 42
+  n_samples: 3000
+  n_species: 10
+  n_regions: 3
+  
+  # ===== TIER 1: PRIOR KNOWLEDGE (agent already knows these) =====
+  prior_knowledge:
+    - id: prior_temp_elev
+      type: correlation
+      variables: [temperature, elevation]
+      effect: -0.85
+      description: "Temperature decreases with elevation (lapse rate)"
+    
+    - id: prior_lat_temp
+      type: correlation
+      variables: [latitude, temperature]
+      effect: -0.70
+      description: "Higher latitudes are colder"
+      
+  # ===== TIER 2: OBVIOUS PATTERNS (easy to find, not novel) =====
+  obvious_patterns:
+    - id: obvious_bergmann
+      type: correlation
+      variables: [body_size, temperature]
+      effect: -0.55
+      description: "Bergmann's rule - larger body size in colder climates"
+    
+    - id: obvious_habitat_richness
+      type: group_difference
+      variable: species_richness
+      group_by: habitat_type
+      effect: 0.6
+      description: "Forest habitats have higher species richness"
+      
+  # ===== TIER 3: NOVEL PATTERNS (should be discovered) =====
+  novel_patterns:
+    # Simple Novel
+    - id: novel_threshold_migration
+      type: threshold
+      variables: [wing_length, migration_distance]
+      condition_var: body_mass
+      threshold: 50
+      effect_below: 0.1
+      effect_above: 0.6
+      difficulty: simple
+      description: "Wing length predicts migration only for birds > 50g"
+      discovery_hints:
+        - "Look at bird data separately"
+        - "Body mass may be a moderator"
+    
+    # Moderate Novel
+    - id: novel_elevation_wet
+      type: two_way_interaction
+      outcome: abundance
+      predictors: [elevation, precipitation]
+      main_effects: [0.2, 0.1]
+      interaction_effect: 0.5
+      difficulty: moderate
+      description: "Species prefer high elevation only when wet"
+      discovery_hints:
+        - "Test interaction between elevation and precipitation"
+        - "Effect is conditional on climate"
+
+  include_prior_in_prompt: true
+  prior_prompt_detail: full

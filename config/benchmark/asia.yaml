@@ -1,0 +1,11 @@
+# Real-World Benchmark - ASIA
+# Lung disease diagnosis network: 8 nodes, 8 edges, 5000 sampled data points
+benchmark:
+  generation_method: realworld_causal_dag
+  preset: asia
+  name: asia
+  seed: 42
+  n_samples: 5000
+  correlation_threshold: 0.10
+  data_source: pgmpy_sample
+  domain: medical_diagnosis

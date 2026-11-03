@@ -1,0 +1,154 @@
+{
+  "name": "iNaturalist Ecology Subset",
+  "description": "Curated subset of iNaturalist research-grade observations for ecological pattern discovery",
+  "patterns": [
+    {
+      "id": "observer_bias_geography",
+      "tier": "prior_knowledge",
+      "difficulty": "simple",
+      "type": "group_difference",
+      "variables": [
+        "latitude",
+        "longitude"
+      ],
+      "description": "Observations are concentrated in North America and Europe due to iNaturalist user demographics",
+      "effect_size": 0.9
+    },
+    {
+      "id": "taxonomic_class_distribution",
+      "tier": "prior_knowledge",
+      "difficulty": "simple",
+      "type": "group_difference",
+      "variables": [
+        "class_name",
+        "species_name"
+      ],
+      "description": "The dataset spans multiple taxonomic classes (Insecta, Mammalia, Aves, Magnoliopsida, Agaricomycetes) reflecting broad ecological diversity",
+      "effect_size": 0.95
+    },
+    {
+      "id": "sunflower_summer_peak",
+      "tier": "obvious",
+      "difficulty": "simple",
+      "type": "group_difference",
+      "variables": [
+        "species_name",
+        "month"
+      ],
+      "description": "Common Sunflower observations peak in summer-autumn months (July-October) during flowering season",
+      "effect_size": 0.6
+    },
+    {
+      "id": "mushroom_autumn_peak",
+      "tier": "novel",
+      "difficulty": "simple",
+      "type": "group_difference",
+      "variables": [
+        "species_name",
+        "month"
+      ],
+      "description": "Fly Agaric observations are strongly concentrated in autumn (September-November) corresponding to fruiting season",
+      "effect_size": 0.7
+    },
+    {
+      "id": "monarch_latitude_season",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "type": "correlation",
+      "variables": [
+        "species_name",
+        "latitude",
+        "month"
+      ],
+      "description": "Monarch Butterfly observations show northward movement through spring-summer (latitude increases with month March-August in Northern Hemisphere), reflecting migration",
+      "effect_size": 0.45
+    },
+    {
+      "id": "swallow_migration",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "type": "correlation",
+      "variables": [
+        "species_name",
+        "latitude",
+        "month"
+      ],
+      "description": "Barn Swallow observations shift northward through spring, reflecting their well-known migration timing",
+      "effect_size": 0.4
+    },
+    {
+      "id": "fox_latitude_range",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "type": "correlation",
+      "variables": [
+        "species_name",
+        "latitude"
+      ],
+      "description": "Red Fox observations span a wider latitude range (25-70N) than most other species, reflecting their adaptability across biomes from desert to arctic",
+      "effect_size": 0.35
+    },
+    {
+      "id": "robin_seasonal_latitude",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "type": "correlation",
+      "variables": [
+        "species_name",
+        "month",
+        "latitude"
+      ],
+      "description": "American Robin observations shift northward through spring-summer, reflecting their partial migration pattern",
+      "effect_size": 0.3
+    },
+    {
+      "id": "plant_vs_animal_seasonality",
+      "tier": "novel",
+      "difficulty": "moderate",
+      "type": "group_difference",
+      "variables": [
+        "kingdom",
+        "month"
+      ],
+      "description": "Plant species (Plantae) observations are more concentrated in spring-summer than animal species, reflecting flowering and leaf-out phenology",
+      "effect_size": 0.4
+    },
+    {
+      "id": "dandelion_early_season",
+      "tier": "novel",
+      "difficulty": "simple",
+      "type": "group_difference",
+      "variables": [
+        "species_name",
+        "month"
+      ],
+      "description": "Dandelion observations peak earlier in the year (March-May) than most other species, as one of the first wildflowers to bloom",
+      "effect_size": 0.5
+    },
+    {
+      "id": "deer_northern_bias",
+      "tier": "novel",
+      "difficulty": "simple",
+      "type": "correlation",
+      "variables": [
+        "species_name",
+        "latitude"
+      ],
+      "description": "Red Deer observations are concentrated at higher latitudes (45-60N), reflecting their temperate/boreal habitat preference",
+      "effect_size": 0.55
+    },
+    {
+      "id": "hemisphere_season_inversion",
+      "tier": "novel",
+      "difficulty": "complex",
+      "type": "two_way_interaction",
+      "variables": [
+        "hemisphere",
+        "month",
+        "species_name"
+      ],
+      "description": "Species with strong seasonal patterns show inverted observation peaks between Northern and Southern hemispheres (e.g., autumn mushrooms appear in March-May in Southern Hemisphere)",
+      "effect_size": 0.5
+    }
+  ]
+}

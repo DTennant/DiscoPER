@@ -1,0 +1,13 @@
+# @package _global_
+
+science_runner_args:
+  _target_: core.runners.discovery_mvp_runner.DiscoveryMVPRunner
+  workspace_root: ${workspace_root}
+  hypothesis_generator: ${hypothesis_generator_args}
+  experiment_planner: ${experiment_planner_args}
+  experiment_runner: ${experiment_runner_args}
+  insight_evaluator: ${insight_eval_args}
+  insight_store: ${insight_store_args}
+  dataset: ${dataset_args}
+  tool_router: ${tool_router_args}
+  max_retries: 3

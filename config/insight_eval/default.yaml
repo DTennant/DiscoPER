@@ -1,0 +1,17 @@
+# @package _global_
+
+insight_eval_args:
+  _target_: core.discovery.insight_evaluator.InsightEvaluator
+  llm_client: ${hypothesis_generator_args}
+  insight_store: ${insight_store_args}
+  thresholds:
+    min_effect_size: 0.2
+    max_p_value: 0.05
+    min_predictive_gain: 0.05
+    min_stability: 0.7
+  reward_weights:
+    strength: 1.0
+    novelty: 2.0
+    generalization: 1.5
+    redundancy: -0.5
+    confound: -1.0

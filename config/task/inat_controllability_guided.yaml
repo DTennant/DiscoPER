@@ -1,0 +1,158 @@
+# iNaturalist ecology discovery config
+# Use with: python launch_discovery.py --config-path=config/task --config-name=inat_discovery
+# Download data first: python scripts/download_inat_subset.py --output data/inat_subset
+
+use_claude_code: false
+
+model_name: claude-sonnet-4-5
+model_url: "https://YOUR_API_ENDPOINT/"
+
+secrets: {}
+log_llm_metrics: true
+
+workspace_root: ${oc.env:PWD}/results/inat_discovery_${now:%Y%m%d_%H%M%S}
+
+n_iterations: 15
+
+inat_data_dir: ${oc.env:PWD}/data/inat_subset
+
+dataset_args:
+  _target_: core.benchmark.inat.inat_adapter.INaturalistDatasetAdapter
+  data_dir: ${inat_data_dir}
+  include_prior_in_prompt: true
+  prior_prompt_detail: "full"
+  random_seed: 42
+
+hypothesis_generator_args:
+  _target_: core.discovery.hypothesis_generator.HypothesisGeneratorAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a biodiversity scientist. Our PRIMARY INTEREST is understanding OBSERVER BIAS in iNaturalist data. Focus on: How does photographer behavior, GPS accuracy, photo quality, urban proximity, and time-of-day affect observation patterns? Separate true ecology from observer artifacts.
+    The dataset contains research-grade observations of multiple species with
+    geographic coordinates, dates, and full taxonomic classification.
+
+    PRIORITIZE these hypothesis types (most valuable first):
+    1. Cross-kingdom/cross-class patterns (e.g., "Fungi peak later than Plants across all temperate zones")
+    2. Interaction effects (e.g., "The latitude-season relationship differs between hemispheres")
+    3. Aggregate taxonomic patterns (e.g., "Insect diversity is higher in tropical latitudes than mammal diversity")
+    4. Multi-variable conditional patterns (e.g., "Amphibians show spring peaks only in temperate latitudes")
+    5. Observer/sampling bias patterns (e.g., "Positional accuracy correlates with urban proximity")
+
+    AVOID these low-value hypothesis types:
+    - Simple pairwise species comparisons ("Species A occurs at higher latitude than Species B")
+    - Trivial seasonal peaks for individual species ("Species X peaks in month Y")
+    - Latitude/longitude range comparisons between two specific species
+    - Restating the same pattern with a different species pair
+
+    Think at the TAXON LEVEL (kingdom, class, order, family), not individual species.
+    Generalize: instead of "Danaus plexippus migrates north in spring", hypothesize
+    "Migratory bird and insect species show northward latitude shifts in spring months."
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+experiment_planner_args:
+  _target_: core.discovery.experiment_planner.ExperimentPlannerAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are an ecological statistician planning experiments on iNaturalist data.
+
+    CRITICAL RULES FOR CODE-CLAIM ALIGNMENT:
+    1. The grouping variable (group) MUST match what the hypothesis compares.
+       - If hypothesis compares specific species, use group=species_name and
+         slice to those species. Do NOT group by class_name or kingdom.
+       - If hypothesis compares taxonomic classes, use group=class_name.
+       - If hypothesis compares kingdoms, use group=kingdom.
+    2. The metric MUST measure what the claim describes.
+       - "Seasonal shift" = difference in latitude between seasons, not raw latitude.
+       - "Range spread" = standard deviation of a variable, not the variable itself.
+    3. The data slice MUST include exactly the populations the claim describes.
+       Do NOT include extra species/groups that dilute the comparison.
+    4. If the hypothesis is about a visual property (habitat, morphology),
+       use visual_attribute_test with group_col matching the comparison axis.
+
+    Available tools:
+    - corr_test: Correlation between two continuous variables.
+    - group_diff_test: Compare a metric between exactly 2 groups.
+    - visual_attribute_test: VLM classifies visual attribute from images,
+      then tests group differences. Requires: attribute_query (e.g.,
+      "habitat_type: open_field / forest / wetland / urban"), group_col.
+    - visual_group_comparison: Show images from two groups to VLM.
+      Requires: group_col, group_a, group_b, comparison_query.
+    - predictive_test: Test if features predict a target.
+    - stratified_retest: Retest within subgroups.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+experiment_runner_args:
+  _target_: core.discovery.experiment_runner.ExperimentRunner
+
+insight_store_args:
+  _target_: core.discovery.insight_store.InsightStore
+  store_path: ${workspace_root}/insights.parquet
+
+tool_router_args:
+  _target_: core.discovery.tool_router.ToolRouter
+  dataset: ${dataset_args}
+  allowed_tools:
+    - corr_test
+    - group_diff_test
+    - predictive_test
+    - cluster_and_enrich
+    - stratified_retest
+    - visual_attribute_test
+    - visual_group_comparison
+  max_samples: 2000
+  timeout: 60
+  use_local_execution: true
+  model_url: ${model_url}
+  model_name: ${model_name}
+
+insight_eval_args:
+  _target_: core.discovery.insight_evaluator.InsightEvaluator
+  llm_client: ${hypothesis_generator_args}
+  insight_store: ${insight_store_args}
+  thresholds:
+    min_effect_size: 0.15
+    max_p_value: 0.05
+    min_predictive_gain: 0.05
+    min_stability: 0.7
+  reward_weights:
+    strength: 1.0
+    novelty: 2.0
+    generalization: 1.5
+    redundancy: -0.5
+    confound: -1.0
+
+enable_context_passing: true
+
+science_runner_args:
+  _target_: core.runners.discovery_mvp_runner.DiscoveryMVPRunner
+  workspace_root: ${workspace_root}
+  hypothesis_generator: ${hypothesis_generator_args}
+  experiment_planner: ${experiment_planner_args}
+  experiment_runner: ${experiment_runner_args}
+  insight_evaluator: ${insight_eval_args}
+  insight_store: ${insight_store_args}
+  dataset: ${dataset_args}
+  tool_router: ${tool_router_args}
+  max_retries: 3
+  meta_discovery_agent: ${meta_discovery_args}
+  meta_step_frequency: ${meta_step_frequency}
+  meta_hypotheses_per_step: ${meta_hypotheses_per_step}
+  enable_context_passing: ${enable_context_passing}
+  use_vision: true
+  vision_n_images: 5
+  vision_image_size: 512
+
+meta_discovery_args:
+  _target_: core.discovery.meta_discovery.MetaDiscoveryAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: "You are a meta-scientist analyzing accumulated ecological discoveries."
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+meta_step_frequency: 5
+meta_hypotheses_per_step: 2

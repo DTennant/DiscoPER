@@ -1,0 +1,29 @@
+model_name: claude-sonnet-4-5
+model_url: "https://YOUR_API_ENDPOINT/"
+secrets: {}
+log_llm_metrics: true
+workspace_root: ${oc.env:PWD}/results/inat24_${now:%Y%m%d_%H%M%S}
+n_iterations: 50
+enable_context_passing: true
+
+dataset_args:
+  _target_: core.benchmark.inat24.inat24_adapter.INat24DatasetAdapter
+  data_dir: ${oc.env:PWD}/data/inquire_benchmarks
+  random_seed: 42
+
+insight_eval_args:
+  thresholds:
+    min_effect_size: 0.2
+    max_p_value: 0.05
+
+meta_discovery_args:
+  _target_: core.discovery.meta_discovery.MetaDiscoveryAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: "You are analyzing patterns in iNaturalist 2024 observations across 10K species."
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+meta_step_frequency: 5
+meta_hypotheses_per_step: 2
+seed: 42

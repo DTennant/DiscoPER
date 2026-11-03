@@ -1,0 +1,14 @@
+# @package _global_
+
+tool_router_args:
+  _target_: core.discovery.tool_router.ToolRouter
+  dataset: ${dataset_args}
+  allowed_tools:
+    - corr_test
+    - group_diff_test
+    - predictive_test
+    - cluster_and_enrich
+    - stratified_retest
+  max_samples: 1000
+  timeout: 60
+  use_local_execution: true

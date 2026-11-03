@@ -1,0 +1,30 @@
+# HeurekaBench-like ablation: P=Full (specific questions given), no Reflect
+# Simulates HeurekaBench's setting: system answers given research questions
+defaults:
+  - inat_discovery
+  - _self_
+
+hypothesis_generator_args:
+  _target_: core.discovery.hypothesis_generator.HypothesisGeneratorAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are analyzing an iNaturalist biodiversity dataset. Answer the following 
+    SPECIFIC RESEARCH QUESTIONS by designing and running statistical tests:
+    
+    1. Do fungi (Amanita muscaria) show seasonal concentration in autumn months?
+    2. Does Monarch butterfly (Danaus plexippus) show northward latitude shift during spring-summer?
+    3. Do different kingdoms (Animalia, Plantae, Fungi) have different latitudinal distributions?
+    4. Does Red Fox (Vulpes vulpes) span a wider latitude range than other mammals?
+    5. Is there a seasonal phenology difference between plants and animals?
+    6. Does Barn Swallow (Hirundo rustica) show migration patterns visible in latitude-month data?
+    7. Do observation patterns differ between Northern and Southern hemispheres?
+    8. Does positional accuracy (GPS error) vary across kingdoms or habitats?
+    9. Are there cross-kingdom interaction effects between season and geographic distribution?
+    
+    For each iteration, pick ONE question you haven't answered yet and design a 
+    rigorous statistical test for it. Report effect size and p-value.
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+# No Reflect (HeurekaBench has no accumulation mechanism)

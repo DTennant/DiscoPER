@@ -1,0 +1,112 @@
+# Visual Synthetic Benchmark Discovery Config
+defaults:
+  - _self_
+
+model_name: claude-sonnet-4-5
+model_url: "https://YOUR_API_ENDPOINT/"
+
+n_iterations: 50
+
+inat_data_dir: ${oc.env:PWD}/data/visual_synthetic
+workspace_root: ${oc.env:PWD}/results/visual_synthetic_run
+
+dataset_args:
+  _target_: core.benchmark.inat.inat_adapter.INaturalistDatasetAdapter
+  data_dir: ${inat_data_dir}
+  random_seed: 42
+
+hypothesis_generator_args:
+  _target_: core.discovery.hypothesis_generator.HypothesisGeneratorAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a data scientist analyzing a synthetic dataset of colored shapes on backgrounds.
+    The dataset has visual variables (color, shape, size, texture, background, count)
+    visible in images, AND metadata variables (category, region, season, temperature, elevation).
+
+    PRIORITIZE discovering:
+    1. Associations between visual features (color, shape, size, texture, background)
+      and metadata (season, region, category, temperature, elevation)
+    2. Visual feature co-occurrence patterns (e.g., certain shapes never have certain textures)
+    3. Cross-modal interactions (visual feature X metadata variable)
+
+    Use visual_attribute_test when hypothesizing about image content.
+    Use group_diff_test or corr_test for metadata-only hypotheses.
+
+experiment_planner_args:
+  _target_: core.discovery.experiment_planner.ExperimentPlannerAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: |
+    You are a statistician planning experiments on synthetic shape data.
+    Available tools:
+    - corr_test: Test correlation between two continuous variables
+    - group_diff_test: Test if a metric differs between two groups
+    - visual_attribute_test: Use VLM to classify visual attribute from images,
+      then test group differences. Use when hypothesis is about image content.
+    - visual_group_comparison: Show images from two groups to VLM for comparison.
+
+experiment_runner_args:
+  _target_: core.discovery.experiment_runner.ExperimentRunner
+
+insight_store_args:
+  _target_: core.discovery.insight_store.InsightStore
+  store_path: ${workspace_root}/insights.parquet
+
+tool_router_args:
+  _target_: core.discovery.tool_router.ToolRouter
+  dataset: ${dataset_args}
+  allowed_tools:
+    - corr_test
+    - group_diff_test
+    - predictive_test
+    - cluster_and_enrich
+    - stratified_retest
+    - visual_attribute_test
+    - visual_group_comparison
+  max_samples: 2000
+  timeout: 60
+  use_local_execution: true
+  model_url: ${model_url}
+  model_name: ${model_name}
+
+insight_eval_args:
+  _target_: core.discovery.insight_evaluator.InsightEvaluator
+  llm_client: ${hypothesis_generator_args}
+  insight_store: ${insight_store_args}
+  thresholds:
+    min_effect_size: 0.15
+
+science_runner_args:
+  _target_: core.runners.discovery_mvp_runner.DiscoveryMVPRunner
+  workspace_root: ${workspace_root}
+  hypothesis_generator: ${hypothesis_generator_args}
+  experiment_planner: ${experiment_planner_args}
+  experiment_runner: ${experiment_runner_args}
+  insight_evaluator: ${insight_eval_args}
+  insight_store: ${insight_store_args}
+  dataset: ${dataset_args}
+  tool_router: ${tool_router_args}
+  max_retries: 3
+  meta_discovery_agent: ${meta_discovery_args}
+  meta_step_frequency: ${meta_step_frequency}
+  meta_hypotheses_per_step: ${meta_hypotheses_per_step}
+  enable_context_passing: ${enable_context_passing}
+  use_vision: true
+  vision_n_images: 5
+  vision_image_size: 128
+
+enable_context_passing: true
+log_llm_metrics: false
+secrets: {}
+
+meta_discovery_args:
+  _target_: core.discovery.meta_discovery.MetaDiscoveryAgent
+  model_url: ${model_url}
+  model_name: ${model_name}
+  system_prompt: "You are a meta-scientist analyzing accumulated discoveries about synthetic shape data."
+  log_llm_metrics: ${log_llm_metrics}
+  secrets: ${secrets}
+
+meta_step_frequency: 5
+meta_hypotheses_per_step: 2

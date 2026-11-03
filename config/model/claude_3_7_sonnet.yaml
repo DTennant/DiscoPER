@@ -1,0 +1,5 @@
+# @package _global_
+
+# LiteLLM model name
+model_name: claude-sonnet-4-5
+model_url: "https://YOUR_API_ENDPOINT/"

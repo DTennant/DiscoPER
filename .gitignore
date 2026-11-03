@@ -1,0 +1,46 @@
+# macOS system files
+.DS_Store
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# pytest
+.pytest_cache
+
+# Virtual environments
+venv/
+.env/
+.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Hydra
+outputs/
+
+# Secrets
+config/secrets/*
+!config/secrets/default.template.yaml
+
+# Workspaces and run artifacts
+workspaces/
+cache/
+results/
+logs/
+/figures/
+
+# Large or generated dataset artifacts (metadata & ground truth JSON/Parquet in data/inat_subset and data/realworld_benchmarks are tracked)
+data/inat_subset/images/
+data/inquire_benchmarks/*.parquet
+data/inquire_benchmarks/*.tar.gz
+data/inquire_benchmarks/*.json.tar.gz
+data/inat24_50k/
+data/inat24_scale_*/
+data/visual_synthetic/
+data/visual_synthetic_biased/
+data/counterfactual/
+data/visual_benchmarks/
+data/synthetic_benchmarks/
